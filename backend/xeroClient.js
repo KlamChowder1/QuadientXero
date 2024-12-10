@@ -61,7 +61,7 @@ app.get('/vendors', async (req, res) => {
     console.log('Xero API Response:', response.body);
 
     const vendors = response.body.contacts.filter(
-      (contact) => contact.contactStatus === 'ACTIVE'
+      (contact) => contact.isSupplier && contact.contactStatus === 'ACTIVE'
     );
     res.json(vendors);
   } catch (error) {
@@ -75,4 +75,33 @@ app.get('/vendors', async (req, res) => {
 
 app.listen(5000, () => {
   console.log('Server running on http://localhost:5000');
+});
+
+app.get('/accounts', async (req, res) => {
+  try {
+    console.log('Fetching accounts from Xero...');
+
+    if (!xero.tenantIds || xero.tenantIds.length === 0) {
+      console.error('No tenant ID available.');
+      return res
+        .status(500)
+        .send('No tenant ID available. Could not retrieve vendors');
+    }
+
+    const response = await xero.accountingApi.getAccounts(xero.tenantIds[0]);
+    console.log('Xero API Response:', response.body);
+
+    if (!response.body.accounts) {
+      throw new Error('No accounts found in the response.');
+    }
+
+    const accounts = response.body.accounts;
+    res.json(accounts);
+  } catch (error) {
+    console.error(
+      'Error fetching accounts:',
+      error.response?.data || error.message
+    );
+    res.status(500).send('Failed to fetch accounts.');
+  }
 });
