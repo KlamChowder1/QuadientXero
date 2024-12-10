@@ -1,6 +1,6 @@
 const { XeroClient } = require('xero-node');
 
-// Initialize Xero client
+// Initialize Xero client with xero-node package
 const xero = new XeroClient({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
@@ -27,6 +27,7 @@ const getVendors = async (req, res) => {
 
     const response = await xero.accountingApi.getContacts(xero.tenantIds[0]);
     const vendors = response.body.contacts.filter(
+      // isSupplier means if they are a vendor or not
       (contact) => contact.isSupplier
     );
     res.json(vendors);
@@ -57,7 +58,7 @@ const getAccounts = async (req, res) => {
   }
 };
 
-// Handle Xero callback
+// callback URI needed for the Xero integration
 const handleCallback = async (req, res) => {
   try {
     const tokenSet = await xero.apiCallback(req.url);
@@ -75,7 +76,7 @@ const handleCallback = async (req, res) => {
   }
 };
 
-// Generate Xero consent URL to handle auth and login
+// Generate Xero consent URL to handle auth and login, need valid Client ID and Client Secret
 const connectXero = async (req, res) => {
   try {
     const consentUrl = await xero.buildConsentUrl();
