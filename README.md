@@ -13,12 +13,12 @@
 ```
 CLIENT_ID=<YOUR_XERO_CLIENT_ID>
 CLIENT_SECRET=<YOUR_XERO_CLIENT_SECRET>
-REDIRECT_URI=http://localhost:5000/callback
+REDIRECT_URI=<YOUR_XERO_REDIRECT_URI>
 ```
-
+- if running locally, you can set the `REDIRECT_URI=http://localhost:5000/callback`, and configure the Redirect URI in your Xero App to be `http://localhost:5000/callback` as well
 - run `node .\app.js` to start the server
 - navigate to `http://localhost:5000/connect` to authenticate the app to Xero and choose which organization you would like to connect
-- upon successful connection, you will be redirected to the `http://localhost:5000/callback` page that says "Successfully connected to Xero!"
+- upon successful connection, you will be redirected to your Xero app's redirect URI page that says "Successfully connected to Xero!"
 - you can view the Accounts and Vendors directly via `http://localhost:5000/accounts` and `http://localhost:5000/vendors` respectively
 
 - you can run tests with `npm run test`
