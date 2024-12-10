@@ -21,6 +21,8 @@ REDIRECT_URI=http://localhost:5000/callback
 - upon successful connection, you will be redirected to the `http://localhost:5000/callback` page that says "Successfully connected to Xero!"
 - you can view the Accounts and Vendors directly via `http://localhost:5000/accounts` and `http://localhost:5000/vendors` respectively
 
+- you can run tests with `npm run test`
+
 ## Frontend
 - in the `frontend` directory, run `npm run start` to start frontend web app
 - select `Fetch Vendors` or `Fethc Accounts` to view the data for vendors and accounts from the backend
