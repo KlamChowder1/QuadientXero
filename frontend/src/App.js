@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './App.css';
 
 const App = () => {
   const [vendors, setVendors] = useState([]);
@@ -62,22 +63,28 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h1>Xero Data Fetcher</h1>
+    <div className="body">
+      <h1>Xero Sample Company Data Fetcher</h1>
+      <div className="data-container">
+        <div className="section">
+          <h2>Vendors</h2>
+          <div className="button-group">
+            <button onClick={fetchVendors}>Fetch Vendors</button>
+            <button onClick={downloadVendorsFile}>Download Vendors File</button>
+          </div>
+          <pre>{JSON.stringify(vendors, null, 2)}</pre>
+        </div>
 
-      <button onClick={fetchVendors}>Fetch Vendors</button>
-      <button onClick={fetchAccounts}>Fetch Accounts</button>
-
-      <div>
-        <h2>Vendors</h2>
-        <pre>{JSON.stringify(vendors, null, 2)}</pre>
-        <button onClick={downloadVendorsFile}>Download Vendors File</button>
-      </div>
-
-      <div>
-        <h2>Accounts</h2>
-        <pre>{JSON.stringify(accounts, null, 2)}</pre>
-        <button onClick={downloadAccountsFile}>Download Accounts File</button>
+        <div className="section">
+          <h2>Accounts</h2>
+          <div className="button-group">
+            <button onClick={fetchAccounts}>Fetch Accounts</button>
+            <button onClick={downloadAccountsFile}>
+              Download Accounts File
+            </button>
+          </div>
+          <pre>{JSON.stringify(accounts, null, 2)}</pre>
+        </div>
       </div>
     </div>
   );
