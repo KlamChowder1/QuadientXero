@@ -3,8 +3,10 @@ const express = require('express');
 const { XeroClient } = require('xero-node');
 const fs = require('fs');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
+app.use(cors());
 const xero = new XeroClient({
   clientId: process.env.CLIENT_ID,
   clientSecret: process.env.CLIENT_SECRET,
